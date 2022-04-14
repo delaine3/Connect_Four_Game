@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/dbConnect'
-import connect_4_Player from '../../../models/connect_4_Player'
+import connect_4_Player from '../../../models/Connect_4_Player'
 
 export default async function handler(req, res) {
   const {
