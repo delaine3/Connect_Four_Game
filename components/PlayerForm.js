@@ -32,18 +32,17 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   }, 1000);
 
   useEffect(() => {
-    if ( winner !== "") {
-      console.log(winner)
+    if (winner !== "" || timer <= 0) {
+      console.log(winner);
       clearTimeout(game_timer);
       setGameOver(true);
       setInprogress(false);
     }
-  }, [winner]);
+  }, [winner, timer]);
   const start = () => {
     setStart_called(true);
     setGameOver(false);
     setInprogress(true);
-
   };
   const pause = () => {
     setPause_called(true);
@@ -85,7 +84,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       ) {
         game_winner.innerHTML = "Player Two Wins!";
         set_winner(player_2_name);
-
       }
     }
   };
@@ -200,7 +198,14 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Winner : " + winner +" Player 1 : " + player_1_nme + " Player 2 : " + player_2_name)
+    console.log(
+      "Winner : " +
+        winner +
+        " Player 1 : " +
+        player_1_nme +
+        " Player 2 : " +
+        player_2_name
+    );
     const errs = formValidate();
     if (Object.keys(errs).length === 0) {
       fornewPlayer ? postData(form) : putData(form);
@@ -232,12 +237,14 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         <div>
           <h1>
             <button onClick={start} className="newFormButton">
-              {" "}
-              <a>New Game</a>{" "}
+              <a>New Game</a>
             </button>
           </h1>
-          <Form className="save-player" id={formId} >
-            <h2>Type in the names of the players if you would you like to save this game's result.</h2>
+          <Form className="save-player" id={formId}>
+            <h2>
+              Type in the names of the players if you would you like to save
+              this game's result.
+            </h2>
             <label htmlFor="player1">Player 1</label>
             <input
               type="text"
@@ -254,10 +261,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
               onChange={handleChange}
               required
             />
-            <button onClick={controlPlayerForm} >
-              Start Game
-            </button>
-            
+            <button onClick={controlPlayerForm}>Start Game</button>
           </Form>
         </div>
       ) : null}
@@ -284,30 +288,39 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           <h1>Timer : {timer} </h1>
           <h1 className="winner"> </h1>
 
-          <h1 className="player">{isPlayer1 ? ( player_1_nme != "" ? player_1_nme : "Player 1") : ( player_2_name != "" ? player_2_name : "Player 2")} </h1>
+          <h1 className="player">
+            {isPlayer1
+              ? player_1_nme != ""
+                ? player_1_nme
+                : "Player 1"
+              : player_2_name != ""
+              ? player_2_name
+              : "Player 2"}{" "}
+          </h1>
 
-          <div id="tile-grid" className="grid">
-            {tileGrid}
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-            <div className="taken floor"></div>
-          </div>
+          {inProgress ? (
+            <div id="tile-grid" className="grid">
+              {tileGrid}
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+              <div className="taken floor"></div>
+            </div>
+          ) : null}
         </div>
       ) : null}
       {gameOver ? (
         <Form className="save-player" id={formId} onSubmit={handleSubmit}>
-          <h2>Would you like to save this game's result?</h2>
           <p>Player 1 : {player_1_nme}</p>
 
           <p>Player 2 : {player_2_name}</p>
           <p>{winner}</p>
 
           <button type="submit" className="btn submit">
-           Return to Score Board
+            Return to Score Board
           </button>
         </Form>
       ) : null}
