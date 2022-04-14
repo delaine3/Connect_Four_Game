@@ -127,40 +127,8 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
     return Tile(tile);
   });
 
-  /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (form) => {
-    const { id } = router.query;
-
-    try {
-      const res = await fetch(`/api/player/${id}`, {
-        method: "PUT",
-        headers: {
-          Accept: contentType,
-          "Content-Type": contentType,
-        },
-        body: JSON.stringify({
-          player_1_nme: player_1_nme,
-          player_2_name: player_2_name,
-          winner: winner,
-        }),
-      });
-
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status);
-      }
-
-      const { data } = await res.json();
-
-      mutate(`/api/player/${id}`, data, false); // Update the local data without a revalidation
-      router.push("/");
-    } catch (error) {
-      setMessage("Failed to update player");
-    }
-  };
-
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (form) => {
+  const postData = async () => {
     try {
       const res = await fetch("/api/player", {
         method: "POST",
@@ -206,21 +174,13 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         " Player 2 : " +
         player_2_name
     );
-    const errs = formValidate();
-    if (Object.keys(errs).length === 0) {
-      fornewPlayer ? postData(form) : putData(form);
-    } else {
-      setErrors({ errs });
-    }
+     postData() 
+    
   };
   const controlPlayerForm = () => {
     set_showPlayerForm(false);
   };
-  const formValidate = () => {
-    let err = {};
 
-    return err;
-  };
 
   return (
     <div>
@@ -243,7 +203,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           <Form className="save-player" id={formId}>
             <h2>
               Type in the names of the players if you would you like to save
-              this game's result.
+              the result of this game.
             </h2>
             <label htmlFor="player1">Player 1</label>
             <input
