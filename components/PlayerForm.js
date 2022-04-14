@@ -10,38 +10,40 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const contentType = "application/json";
 
   const [inProgress, setInprogress] = useState(false);
-  const [playerName, setPlayerName] = useState("");
-  const [score, setScore] = useState(0);
+  const [player_1_nme, set_player_1_nme] = useState("");
+  const [player_2_name, set_player_2_name] = useState("");
+  const [winner, set_winner] = useState("");
+
   const [gameOver, setGameOver] = useState(false);
   const [timer, setTimer] = useState(60);
   const [start_called, setStart_called] = useState(false);
   const [pause_called, setPause_called] = useState(false);
   const [isPlayer1, setIsPlayer1] = useState(true);
+  const [showPlayerForm, set_showPlayerForm] = useState(true);
   const [form, setForm] = useState({
-    name: playerName,
-    score: score,
+    player_1_nme: player_1_nme,
+    player_2_name: player_2_name,
+    winner: winner,
   });
   const game_timer = setTimeout(() => {
-    let winner = document.querySelector(".winner");
-
     if (inProgress) {
       setTimer(timer - 1);
     }
   }, 1000);
 
   useEffect(() => {
-    if (timer == 0) {
+    if ( winner !== "") {
+      console.log(winner)
       clearTimeout(game_timer);
       setGameOver(true);
       setInprogress(false);
     }
-  }, [timer]);
+  }, [winner]);
   const start = () => {
     setStart_called(true);
     setGameOver(false);
-    setScore(0);
     setInprogress(true);
-    setPlayerName("");
+
   };
   const pause = () => {
     setPause_called(true);
@@ -54,7 +56,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   };
   const checkGrid = () => {
     let tile_grid = document.querySelectorAll(".grid div");
-    let winner = document.querySelector(".winner");
+    let game_winner = document.querySelector(".winner");
 
     for (let y = 0; y < winningArrays.length; y++) {
       const square1 = tile_grid[winningArrays[y][0]].id;
@@ -70,8 +72,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[square4].classList.contains("player1")
       ) {
         console.log("Player One Wins!");
+        set_winner(player_1_nme);
 
-        winner.innerHTML = "Player One Wins!";
+        game_winner.innerHTML = "Player One Wins!";
       }
       //check those tiles to see if they all have the class of player-two
       if (
@@ -80,7 +83,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[square3].classList.contains("player2") &&
         tile_grid[square4].classList.contains("player2")
       ) {
-        winner.innerHTML = "Player Two Wins!";
+        game_winner.innerHTML = "Player Two Wins!";
+        set_winner(player_2_name);
+
       }
     }
   };
@@ -136,8 +141,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           "Content-Type": contentType,
         },
         body: JSON.stringify({
-          name: playerName,
-          score: score,
+          player_1_nme: player_1_nme,
+          player_2_name: player_2_name,
+          winner: winner,
         }),
       });
 
@@ -165,8 +171,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           "Content-Type": contentType,
         },
         body: JSON.stringify({
-          name: playerName,
-          score: score,
+          player_1_nme: winner,
+          player_2_name: player_2_name,
+          winner: player_1_nme,
         }),
       });
 
@@ -185,10 +192,15 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
     const target = e.target;
     const value = target.value;
 
-    setPlayerName(value);
+    if (target.name == "player1") {
+      set_player_1_nme(value);
+    } else {
+      set_player_2_name(value);
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Winner : " + winner +" Player 1 : " + player_1_nme + " Player 2 : " + player_2_name)
     const errs = formValidate();
     if (Object.keys(errs).length === 0) {
       fornewPlayer ? postData(form) : putData(form);
@@ -196,7 +208,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       setErrors({ errs });
     }
   };
-
+  const controlPlayerForm = () => {
+    set_showPlayerForm(false);
+  };
   const formValidate = () => {
     let err = {};
 
@@ -214,7 +228,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         </Link>
       </h1>
 
-      {gameOver ? (
+      {showPlayerForm ? (
         <div>
           <h1>
             <button onClick={start} className="newFormButton">
@@ -222,46 +236,33 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
               <a>New Game</a>{" "}
             </button>
           </h1>
-          <Form className="save-player" id={formId} onSubmit={handleSubmit}>
-            <h2>
-              Yay! Record your high score by filling in your name and hitting
-              the submit button!
-            </h2>
-            <label htmlFor="name">Name</label>
-
+          <Form className="save-player" id={formId} >
+            <h2>Type in the names of the players if you would you like to save this game's result.</h2>
+            <label htmlFor="player1">Player 1</label>
             <input
               type="text"
-              name="name"
-              value={playerName}
+              name="player1"
+              value={player_1_nme}
               onChange={handleChange}
               required
             />
-            <label htmlFor="score">Score</label>
-
-            <p
+            <label htmlFor="player2">Player 2</label>
+            <input
               type="text"
-              name="score"
-              value={score}
+              name="player2"
+              value={player_2_name}
               onChange={handleChange}
               required
-            >
-              {score}
-            </p>
-
-            <button type="submit" className="btn submit">
-              Submit
+            />
+            <button onClick={controlPlayerForm} >
+              Start Game
             </button>
-
-            <div key={Math.random() * 100000}>
-              {Object.keys(errors).map((err, index) => (
-                <li key={index}>{err}</li>
-              ))}
-            </div>
+            
           </Form>
         </div>
       ) : null}
 
-      {!gameOver ? (
+      {!gameOver && !showPlayerForm ? (
         <div className="game">
           {start_called ? (
             <div>
@@ -283,7 +284,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           <h1>Timer : {timer} </h1>
           <h1 className="winner"> </h1>
 
-          <h1 className="player">{isPlayer1 ? "PLAYER 1" : "PLAYER 2"} </h1>
+          <h1 className="player">{isPlayer1 ? ( player_1_nme != "" ? player_1_nme : "Player 1") : ( player_2_name != "" ? player_2_name : "Player 2")} </h1>
 
           <div id="tile-grid" className="grid">
             {tileGrid}
@@ -296,6 +297,19 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
             <div className="taken floor"></div>
           </div>
         </div>
+      ) : null}
+      {gameOver ? (
+        <Form className="save-player" id={formId} onSubmit={handleSubmit}>
+          <h2>Would you like to save this game's result?</h2>
+          <p>Player 1 : {player_1_nme}</p>
+
+          <p>Player 2 : {player_2_name}</p>
+          <p>{winner}</p>
+
+          <button type="submit" className="btn submit">
+           Return to Score Board
+          </button>
+        </Form>
       ) : null}
     </div>
   );

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import dbConnect from "../lib/dbConnect";
-import connect_4_Player from "../models/connect_4_Player";
+import Connect_4_Players from "../models/Connect_4_Players";
 import { useState } from "react";
 
 const Index = ({ player }) => {
@@ -30,20 +30,21 @@ const Index = ({ player }) => {
       </h1>
       <h1>Leader Board</h1>
       <div className="headers">
-      <h2 className="score">Scores </h2>
-      <h2 className="player-name">Player name</h2>
       </div>
      
 
       {/* Create a row for each player */}
       <div >
-           
         <ol >
+
         {player.map((player) => (
           <li         key={player._id}
           className="score-inner-grid">
-              <span ><h2>{player.name}</h2> </span>
-              <span ><h2>{player.score}</h2> </span>
+              <span ><h2>{player.player_1_nme}</h2> </span> 
+              <span ><h2> VS</h2> </span> 
+              <span ><h2>{player.player_2_name}</h2> </span>
+              <span ><h2>Winner : {player.winner}</h2> </span>
+
           </li>
         ))}
         </ol>
@@ -57,7 +58,7 @@ export async function getServerSideProps() {
   await dbConnect();
 
   /* find all the data  our database */
-  const result = await connect_4_Player.find().sort([['score', 'descending']])
+  const result = await Connect_4_Players.find().sort([['score', 'descending']])
   const player = result.map((doc) => {
     const player = doc.toObject();
     player._id = player._id.toString();

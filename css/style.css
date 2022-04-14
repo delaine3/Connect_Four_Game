@@ -45,7 +45,7 @@ a {
 }
 .save-player {
   box-shadow: 0 0 1vw 1vw #ffffff8f;
-  padding: 2%;
+  padding: 5%;
   background-color: #08f1e57a;
 }
 h1,
@@ -78,7 +78,7 @@ button {
   font-size: x-large;
 }
 button:hover {
-  background-color: #3eb648;
+  background-color: #d829e1;
   color: #ffffff;
   font-weight: bold;
 }
@@ -127,9 +127,9 @@ button:hover {
 }
 .score-inner-grid {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto auto;
   margin: auto;
-  width: 50%;
+  width: 80%;
 }
 
 .tile {
@@ -142,9 +142,11 @@ button:hover {
 }
 .headers {
   color: aliceblue;
-  width: 30%;
+  width: 25%;
   font-size: x-large;
   margin: auto;
+  float: right;
+  align-items: right;
 }
 
 .player-name {
