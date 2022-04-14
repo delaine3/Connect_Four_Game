@@ -20,11 +20,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [pause_called, setPause_called] = useState(false);
   const [isPlayer1, setIsPlayer1] = useState(true);
   const [showPlayerForm, set_showPlayerForm] = useState(true);
-  const [form, setForm] = useState({
-    player_1_nme: player_1_nme,
-    player_2_name: player_2_name,
-    winner: winner,
-  });
+
   const game_timer = setTimeout(() => {
     if (inProgress) {
       setTimer(timer - 1);
@@ -137,9 +133,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           "Content-Type": contentType,
         },
         body: JSON.stringify({
-          player_1_nme: winner,
+          player_1_nme: player_1_nme,
           player_2_name: player_2_name,
-          winner: player_1_nme,
+          winner: winner != "" ? winner : "Draw",
         }),
       });
 
