@@ -58,7 +58,7 @@ export async function getServerSideProps() {
   await dbConnect();
 
   /* find all the data  our database */
-  const result = await Connect_4_Players.find().sort([['score', 'descending']])
+  const result = await Connect_4_Players.find().sort( { "_id": -1 } )
   const player = result.map((doc) => {
     const player = doc.toObject();
     player._id = player._id.toString();
