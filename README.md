@@ -15,7 +15,7 @@ Technologies used:
 - NodeJS
 - NextJS
  
-[Go to live version of app](https://github.com/kubowania/connect-four)
+[Go to live version of app](https://connect-four-game.vercel.app/)
 
 ## Getting Started
 
