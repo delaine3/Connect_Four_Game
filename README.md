@@ -15,7 +15,7 @@ Technologies used:
 - NodeJS
 - NextJS
  
-[Go to live version of app](https://a-memory-game-seven.vercel.app/)
+[Go to live version of app](https://github.com/kubowania/connect-four)
 
 ## Getting Started
 
