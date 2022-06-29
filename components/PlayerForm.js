@@ -67,7 +67,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[square4].classList.contains("player1")
       ) {
         console.log("Player One Wins!");
-        set_winner(player_1_nme);
+        set_winner(player_1_nme != "" ? player_1_nme : "Player 1");
 
         game_winner.innerHTML = "Player One Wins!";
       }
@@ -79,7 +79,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[square4].classList.contains("player2")
       ) {
         game_winner.innerHTML = "Player Two Wins!";
-        set_winner(player_2_name);
+        set_winner(player_2_nme != "" ? player_2_nme : "Player 2");
       }
     }
   };
