@@ -5,6 +5,7 @@ import { Form } from "semantic-ui-react";
 import { tileArray } from "./tile_array";
 import Link from "next/link";
 import { winningArrays } from "./winning_arrays";
+
 const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const router = useRouter();
   const contentType = "application/json";
@@ -58,7 +59,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       const square2 = tile_grid[winningArrays[y][1]].id;
       const square3 = tile_grid[winningArrays[y][2]].id;
       const square4 = tile_grid[winningArrays[y][3]].id;
-
       //check those squares to see if they all have the class of player-one
       if (
         tile_grid[square1].classList.contains("player1") &&
@@ -89,6 +89,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       let tile_grid = document.querySelectorAll(".grid div");
       let tile = event.target;
       let tile_below = parseInt(tile_grid[tile.id].id) + 7;
+      console.log("TILE BELOW " + tile_grid[tile_grid[0].id])
       if (
         !tile.classList.contains("taken") &&
         tile_grid[tile_below].classList.contains("taken")
