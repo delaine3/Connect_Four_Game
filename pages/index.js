@@ -40,9 +40,9 @@ const Index = ({ player }) => {
         {player.map((player) => (
           <li         key={player._id}
           className="score-inner-grid">
-              <span ><h2>{player.player_1_nme}</h2> </span> 
+              <span ><h2>{player.player_1_nme ?player.player_1_nme : "Player 1" }</h2> </span> 
               <span ><h2> VS</h2> </span> 
-              <span ><h2>{player.player_2_name}</h2> </span>
+              <span ><h2>{player.player_2_name ? player.player_2_name : "Player 2"}</h2> </span>
               <span ><h2>Winner : {player.winner}</h2> </span>
 
           </li>
