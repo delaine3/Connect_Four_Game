@@ -16,7 +16,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [winner, set_winner] = useState("");
 
   const [gameOver, setGameOver] = useState(false);
-  const [timer, setTimer] = useState(1160);
+  const [timer, setTimer] = useState(60);
   const [start_called, setStart_called] = useState(false);
   const [pause_called, setPause_called] = useState(false);
   const [isPlayer1, setIsPlayer1] = useState(true);
@@ -227,15 +227,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         <div className="">
           {start_called ? (
             <div>
-              {pause_called ? (
-                <button id="resume" onClick={resume}>
-                  Resume
-                </button>
-              ) : (
-                <button id="pause" onClick={pause}>
-                  Pause
-                </button>
-              )}
+       
             </div>
           ) : (
             <button id="start" onClick={start}>
