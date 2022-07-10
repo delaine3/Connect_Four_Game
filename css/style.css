@@ -125,13 +125,22 @@ button:hover {
   background-color: rgb(124, 95, 0);
   box-shadow: 0.2vw 0.2vw 1vw rgb(146, 112, 0);
 }
-.score-inner-grid {
-  display: grid;
+.score {
+  display: flex;
   grid-template-columns: auto auto auto auto;
   margin: auto;
-  width: 80%;
 }
-
+.slot{
+  width: 150px;
+}
+ul{
+  padding: 0;
+  list-style-type: none;
+}
+.score-board{
+  width: 80%;
+  margin: auto;
+}
 .tile {
   width: 3vw;
   height: 3vw;
