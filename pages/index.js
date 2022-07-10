@@ -28,12 +28,11 @@ const Index = ({ player }) => {
         </Link>
       </h1>
       <h1>Leader Board</h1>
-      <div className="headers"></div>
 
       {/* Create a row for each player */}
       <div>
         <ul className="score-board">
-        <li className="score" key={player._id}>
+        <li className="score header" id="myHeader" key={player._id}>
               <span className="slot">
                 <h2>
                   {player.player_1_nme ? player.player_1_nme : "Player 1"}
@@ -45,7 +44,7 @@ const Index = ({ player }) => {
                   {player.player_2_name ? player.player_2_name : "Player 2"}
                 </h2>{" "}
               </span>
-              
+
               <span className="slot">
                 <h2>Winner : {player.winner}</h2>{" "}
               </span>

@@ -129,17 +129,34 @@ button:hover {
   display: flex;
   grid-template-columns: auto auto auto auto;
   margin: auto;
+  justify-content: center;
 }
 .slot{
-  width: 150px;
+  width: 130px;
+}
+@media only screen and (max-width: 600px) {
+  .slot {
+    font-size: small;
+    width: 100px;
+
+  }
+}
+.header {
+  background: rgba(255, 255, 255, 0.61);
+  color: #000000;
+  
 }
 ul{
   padding: 0;
   list-style-type: none;
 }
 .score-board{
-  width: 80%;
-  margin: auto;
+  width: 50%;
+  min-width: min-content;
+  border: #24d8d8f5 solid;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 .tile {
   width: 3vw;
