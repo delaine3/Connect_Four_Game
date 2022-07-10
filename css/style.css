@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-.app {
+
+html,
+body {
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-image: linear-gradient(
     #e06c9f,
     #ffa8d1,
@@ -9,8 +16,12 @@
     #37d6db
   );
 
-  padding-bottom: 14%;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  overflow-x: hidden;
 }
+
 * {
   font-family: "Open Sans", sans-serif;
 }
@@ -89,25 +100,15 @@ button:hover {
   margin: auto;
   box-shadow: 0 0 1vw 1vw #ffffff8f;
   min-width: fit-content;
-  background-image: linear-gradient(
-   
-    #edbfb7de,
-    #eddcb7,
-    #a1bebf,
-    #37d6db
-  )}
+  background-image: linear-gradient(#edbfb7de, #eddcb7, #a1bebf, #37d6db);
+}
 .player1 {
-  border-radius: 2vw;
   border: 1px solid rgb(197, 168, 0);
   background-color: gold;
-  box-shadow: .2vw .2vw 1vw rgb(180, 154, 3);
-
 }
 .player2 {
-  border-radius: 2vw;
   border: 1px solid rgb(75, 224, 0);
   background-color: rgb(71, 212, 0);
-  box-shadow: .2vw .2vw 1vw rgb(85, 255, 0);
 }
 .grid {
   align-items: center;
@@ -117,13 +118,12 @@ button:hover {
   grid-template-columns: 15% 15% 15% 15% 15% 15% 15%;
 }
 .taken {
-
 }
 .floor {
   height: 2vw;
   border: 1px solid rgb(182, 139, 0);
   background-color: rgb(124, 95, 0);
-  box-shadow: .2vw .2vw 1vw rgb(146, 112, 0);
+  box-shadow: 0.2vw 0.2vw 1vw rgb(146, 112, 0);
 }
 .score-inner-grid {
   display: grid;
@@ -135,8 +135,12 @@ button:hover {
 .tile {
   width: 3vw;
   height: 3vw;
-}
+  border-left:solid rgb(146, 112, 0);
 
+}
+.line{
+  border-left:solid rgb(146, 112, 0);
+}
 .headers h2 {
   display: inline-block;
 }
