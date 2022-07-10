@@ -38,7 +38,7 @@ body {
   background-color: rgba(20, 212, 116, 0.664) fdbb;
   box-shadow: 0 0 5px 5px #f1f1f1c5;
   border-radius: 10px;
-  font-size: 125%;
+  font-size: 35px;
 }
 .newFormButton:hover {
   margin: 1%;
@@ -69,7 +69,7 @@ h2 {
 }
 
 .game {
-  width: 50%;
+  width: 90%;
   padding: 4%;
   margin: auto;
   box-shadow: 0 0 1vw 1vw #ffffff8f;
@@ -107,6 +107,7 @@ button:hover {
   background-color: gold;
 }
 .player2 {
+  width: 30px;
   border: 1px solid rgb(75, 224, 0);
   background-color: rgb(71, 212, 0);
 }
@@ -131,41 +132,52 @@ button:hover {
   margin: auto;
   justify-content: center;
 }
-.slot{
+.slot {
   width: 130px;
 }
 @media only screen and (max-width: 600px) {
   .slot {
     font-size: small;
     width: 100px;
-
+  }
+  .grid{
+    width: 650px;
+    
+  }
+  #tile-grid{
+    width: 250px;
+    height: 150px;
+  }
+  .save-player {
+    width: 80%;
+    font-size: small;
+  }
+  #name-area {
+    width: 90%;
   }
 }
 .header {
   background: rgba(255, 255, 255, 0.61);
   color: #000000;
-  
 }
-ul{
+ul {
   padding: 0;
   list-style-type: none;
 }
-.score-board{
+.score-board {
   width: 50%;
   min-width: min-content;
   border: #24d8d8f5 solid;
   margin-left: auto;
   margin-right: auto;
-
 }
 .tile {
-  width: 3vw;
-  height: 3vw;
-  border-left:solid rgb(146, 112, 0);
-
+  width: 7vw;
+  height: 7vw;
+  border-left: solid rgb(146, 112, 0);
 }
-.line{
-  border-left:solid rgb(146, 112, 0);
+.line {
+  border-left: solid rgb(146, 112, 0);
 }
 .headers h2 {
   display: inline-block;

@@ -16,7 +16,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [winner, set_winner] = useState("");
 
   const [gameOver, setGameOver] = useState(false);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(1160);
   const [start_called, setStart_called] = useState(false);
   const [pause_called, setPause_called] = useState(false);
   const [isPlayer1, setIsPlayer1] = useState(true);
@@ -79,7 +79,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[square4].classList.contains("player2")
       ) {
         game_winner.innerHTML = "Player Two Wins!";
-        set_winner(player_2_nme != "" ? player_2_nme : "Player 2");
+        set_winner(player_2_name != "" ? player_2_name : "Player 2");
       }
     }
   };
@@ -89,7 +89,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       let tile_grid = document.querySelectorAll(".grid div");
       let tile = event.target;
       let tile_below = parseInt(tile_grid[tile.id].id) + 7;
-      console.log("TILE BELOW " + tile_grid[tile_grid[0].id])
+      console.log("TILE BELOW " + tile_grid[tile_grid[0].id]);
       if (
         !tile.classList.contains("taken") &&
         tile_grid[tile_below].classList.contains("taken")
@@ -171,13 +171,11 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         " Player 2 : " +
         player_2_name
     );
-     postData() 
-    
+    postData();
   };
   const controlPlayerForm = () => {
     set_showPlayerForm(false);
   };
-
 
   return (
     <div>
@@ -199,11 +197,12 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           </h1>
           <Form className="save-player" id={formId}>
             <h2>
-              Type in the names of the players if you would you like to save
-              the result of this game.
+              Type in the names of the players if you would you like to save the
+              result of this game.
             </h2>
             <label htmlFor="player1">Player 1</label>
-            <input
+            <textarea
+              id="name-area"
               type="text"
               name="player1"
               value={player_1_nme}
@@ -211,7 +210,8 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
               required
             />
             <label htmlFor="player2">Player 2</label>
-            <input
+            <textarea
+              id="name-area"
               type="text"
               name="player2"
               value={player_2_name}
@@ -224,7 +224,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       ) : null}
 
       {!gameOver && !showPlayerForm ? (
-        <div className="game">
+        <div className="">
           {start_called ? (
             <div>
               {pause_called ? (
